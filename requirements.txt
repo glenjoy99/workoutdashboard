@@ -1,5 +1,5 @@
-numpy==2.3.1
-pandas==2.3.0
-plotly==6.2.0
-streamlit==1.46.1
+numpy
+pandas
+plotly
+streamlit
 plotly_calplot
