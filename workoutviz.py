@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import streamlit as st
+from plotly_calplot import calplot
+
+
 
 
 st.set_page_config(layout="wide", page_title="Dashboard")
@@ -23,7 +26,7 @@ if my_upload is None:
     st.write("Upload your data to get started!")
 else:
     try:
-        df = pd.read_csv(my_upload)
+        df = pd.read_csv(my_upload, sep=',')
         # st.write(df.head())
 
         # df = df[~(df["Set Order"] == 'Rest Timer')] # removing records related to rest between sets
@@ -113,7 +116,13 @@ else:
         col2.metric(label=":date: Best Month", value=f"{BEST_MONTH}({BEST_MONTH_COUNT} days)")
         col3.metric(label=":stopwatch: Avg Workout Length", value=f"{AVG_DURATION:,.0f} mins")
 
+        # df['Weight'] = df['Weight (kg)'] * 2.2 # conver to pounds
+        
         df['Volume'] = df['Weight'] * df['Reps']
+
+        fig_cal = calplot(df, x="Day", y="Duration", dark_theme=True, colorscale="blues")
+        st.plotly_chart(fig_cal)
+
 
         st.write("### :trophy: Personal Records")
         st.write("Calculated by best total volume for a set (weight x reps)")
