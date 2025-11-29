@@ -26,7 +26,7 @@ else:
         df = pd.read_csv(my_upload)
         # st.write(df.head())
 
-        df = df[~(df["Set Order"] == 'Rest Timer')] # removing records related to rest between sets
+        # df = df[~(df["Set Order"] == 'Rest Timer')] # removing records related to rest between sets
 
         df['Date'] = pd.to_datetime(df['Date'])
         df.sort_values(by='Date', inplace=True)
