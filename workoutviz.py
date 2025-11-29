@@ -5,9 +5,6 @@ import plotly.express as px
 import streamlit as st
 from plotly_calplot import calplot
 
-
-
-
 st.set_page_config(layout="wide", page_title="Dashboard")
 st.title(":muscle: Strong App Workout Dashboard")
 
@@ -125,8 +122,8 @@ else:
 
 
         st.write("### :trophy: Personal Records")
-        st.write("Calculated by best total volume for a set (weight x reps)")
-        st.write(df.groupby(['Exercise Name'])['Volume'].max())
+        st.write("Calculated by heaviest weight for a set")
+        st.write(df.groupby(['Exercise Name'])['Weight'].max())
 
         st.write("### :chart_with_upwards_trend: Progress")
 
@@ -138,7 +135,7 @@ else:
         fig2 = px.box(df, x="Month", y="Weight", title="Monthly Weight Progression by Exercise", color="Exercise Name", notched=False, template="plotly_dark")
         st.plotly_chart(fig2)
 
-        fig3 = px.box(df, x="Month", y="Duration", title="Workout Durations", color="Workout Name", notched=False, template="plotly_dark")
+        fig3 = px.box(df, x="Month", y="Duration", title="Workout Durations (mins)", color="Workout Name", notched=False, template="plotly_dark")
         st.plotly_chart(fig3)
     except Exception as e:
         st.error(str(e))
