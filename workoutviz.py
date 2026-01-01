@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import streamlit as st
-from plotly_calplot import calplot
+# from plotly_calplot import calplot
+import lesley
 
 st.set_page_config(layout="wide", page_title="Dashboard")
 st.title(":muscle: Strong App Workout Dashboard")
@@ -117,8 +118,10 @@ else:
         
         df['Volume'] = df['Weight'] * df['Reps']
 
-        fig_cal = calplot(df, x="Day", y="Duration", dark_theme=True, colorscale="blues")
-        st.plotly_chart(fig_cal)
+        # fig_cal = calplot(df, x="Day", y="Duration", dark_theme=True, colorscale="blues")
+        # st.plotly_chart(fig_cal)
+        
+        st.altair_chart(lesley.cal_heatmap(df['Day'], df['Duration'].fillna(30)))
 
 
         st.write("### :trophy: Personal Records")
@@ -126,6 +129,7 @@ else:
         st.write(df.groupby(['Exercise Name'])['Weight'].max())
 
         st.write("### :chart_with_upwards_trend: Progress")
+        st.write('Double click an item on the legend to isolate it on the chart.')
 
         fig1 = px.line(df, x="Day", y="Weight", title='Workout Weight over Time', color='Exercise Name', markers=True, template='plotly_dark')
         fig1.update_traces(textposition="bottom right")
