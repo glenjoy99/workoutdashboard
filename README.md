@@ -4,8 +4,7 @@ A Streamlit-based web dashboard designed to visualize and analyze your workout d
 
 To run, simply clone the repository and run the following commands to build the environment and deploy.
 
-'''
+```
 pip install -r requirements.txt
 streamlit run workoutviz.py
-'''
-
+```
